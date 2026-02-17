@@ -1,6 +1,7 @@
 <?php
 /*
 Plugin Name: Geweb AI Search
+Plugin URI: https://aisearch.mygeweb.com/
 Description: AI-powered search for WordPress using Google Gemini
 Version: 2.0.0
 Author: gavrilovweb

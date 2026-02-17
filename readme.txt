@@ -13,6 +13,8 @@ AI-powered search for WordPress using Google Gemini. Provides intelligent answer
 
 == Description ==
 
+Live demo: https://aisearch.mygeweb.com/
+
 Geweb AI Search transforms your WordPress search into an intelligent assistant powered by Google Gemini AI. Instead of returning a plain list of matching posts, it understands the user's question and provides a direct, contextual answer — along with links to the source pages.
 
 The plugin intercepts the standard WordPress search form and opens a modal with two modes: instant autocomplete suggestions (via WP_Query) and a full AI chat powered by Google Gemini File Search.

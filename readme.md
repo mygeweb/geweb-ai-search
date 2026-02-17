@@ -13,6 +13,8 @@ Geweb AI Search transforms your WordPress search into an intelligent assistant p
 
 The plugin intercepts the standard WordPress search form and opens a modal with two modes: instant autocomplete suggestions (via WP_Query) and a full AI chat powered by Google Gemini File Search.
 
+**[Live Demo](https://aisearch.mygeweb.com/)**
+
 ## Features
 
 - **AI-Powered Answers** — Uses Google Gemini File Search to find relevant content and generate natural-language answers
@@ -93,22 +95,6 @@ This plugin connects to the **Google Gemini API** to index your content and answ
 ## Third-Party Libraries
 
 This plugin bundles [league/html-to-markdown](https://github.com/thephpleague/html-to-markdown) (MIT License) — used to convert WordPress post HTML to Markdown for AI indexing.
-
-## Changelog
-
-### 2.0.0
-- Complete rewrite with modern architecture
-- PSR-4 namespace support (`Geweb\AISearch`)
-- Replaced cURL with WordPress HTTP API (`wp_remote_request`)
-- Support for Gemini 3 models with structured JSON responses
-- API key encrypted with libsodium before storage
-- Auto-upload on save, auto-delete on unpublish/delete
-- Bulk library generation with live progress indicator
-- Conversation history in AI chat modal
-- Source attribution with links to indexed pages
-
-### 1.0.0
-- Initial release
 
 ## License
 
