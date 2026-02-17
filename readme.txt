@@ -155,4 +155,4 @@ This plugin bundles the following open-source library:
 
 == Support ==
 
-* GitHub: https://github.com/mygeweb/wordpress-ai-search
+* GitHub: https://github.com/mygeweb/geweb-ai-search
