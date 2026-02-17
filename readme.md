@@ -1,6 +1,6 @@
 # Geweb AI Search
 
-**AI-powered search for WordPress using Google Gemini. Real answers, not just links.**
+**AI-powered search for WordPress using Google Gemini. Smart answers, source links, and instant autocomplete — all in one modal.**
 
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue?logo=wordpress)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777BB4?logo=php)

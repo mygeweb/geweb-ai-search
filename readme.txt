@@ -9,7 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: geweb-ai-search
 
-AI-powered search for WordPress using Google Gemini. Provides intelligent answers based on your website content.
+AI-powered search for WordPress using Google Gemini. Smart answers, source links, and instant autocomplete — all in one modal.
 
 == Description ==
 
