@@ -216,32 +216,33 @@ class WP {
     public function ajaxAiChat(): void {
         check_ajax_referer('geweb_ai_search_search', 'nonce');
 
-        // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized below in foreach loop
+        // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Each array element is sanitized in the foreach loop below
         $rawMessages = isset($_POST['messages']) && is_array($_POST['messages']) ? wp_unslash($_POST['messages']) : [];
         // phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-        
-        if (empty($rawMessages) || !is_array($rawMessages)) {
+
+        if (empty($rawMessages)) {
             wp_send_json_error(['message' => 'No messages provided']);
         }
 
-        $sanitizedMessages = [];
-        foreach ($rawMessages as $message) {
-            if (!is_array($message)) {
+        $allowedRoles = ['user', 'model'];
+        $messages = [];
+        foreach ($rawMessages as $rawMessage) {
+            if (!is_array($rawMessage)) {
                 continue;
             }
-            $sanitizedMessages[] = [
-                'role'    => sanitize_text_field($message['role'] ?? ''),
-                'content' => sanitize_text_field($message['content'] ?? ''),
+            
+            $role = isset($rawMessage['role']) ? sanitize_text_field($rawMessage['role']) : '';
+            $content = isset($rawMessage['content']) ? sanitize_text_field($rawMessage['content']) : '';
+
+            if (!in_array($role, $allowedRoles, true)) {
+                $role = 'user';
+            }
+            
+            $messages[] = [
+                'role' => $role,
+                'content' => $content,
             ];
         }
-
-        $allowedRoles = ['user', 'model'];
-        $messages = array_map(function ($message) use ($allowedRoles) {
-            return [
-                'role'    => in_array($message['role'], $allowedRoles, true) ? $message['role'] : 'user',
-                'content' => $message['content'],
-            ];
-        }, $sanitizedMessages);
 
         try {
             $gemini = new Gemini();
