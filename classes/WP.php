@@ -216,18 +216,32 @@ class WP {
     public function ajaxAiChat(): void {
         check_ajax_referer('geweb_ai_search_search', 'nonce');
 
-        $rawMessages = isset($_POST['messages']) ? wp_unslash($_POST['messages']) : [];
+        // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized below in foreach loop
+        $rawMessages = isset($_POST['messages']) && is_array($_POST['messages']) ? wp_unslash($_POST['messages']) : [];
+        // phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        
         if (empty($rawMessages) || !is_array($rawMessages)) {
             wp_send_json_error(['message' => 'No messages provided']);
+        }
+
+        $sanitizedMessages = [];
+        foreach ($rawMessages as $message) {
+            if (!is_array($message)) {
+                continue;
+            }
+            $sanitizedMessages[] = [
+                'role'    => sanitize_text_field($message['role'] ?? ''),
+                'content' => sanitize_text_field($message['content'] ?? ''),
+            ];
         }
 
         $allowedRoles = ['user', 'model'];
         $messages = array_map(function ($message) use ($allowedRoles) {
             return [
-                'role'    => in_array($message['role'] ?? '', $allowedRoles, true) ? $message['role'] : 'user',
-                'content' => sanitize_text_field($message['content'] ?? ''),
+                'role'    => in_array($message['role'], $allowedRoles, true) ? $message['role'] : 'user',
+                'content' => $message['content'],
             ];
-        }, $rawMessages);
+        }, $sanitizedMessages);
 
         try {
             $gemini = new Gemini();
