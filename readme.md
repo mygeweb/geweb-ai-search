@@ -5,7 +5,7 @@
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue?logo=wordpress)
 ![PHP](https://img.shields.io/badge/PHP-7.2%2B-777BB4?logo=php)
 ![License](https://img.shields.io/badge/License-GPLv2-green)
-![Version](https://img.shields.io/badge/Version-2.0.0-orange)
+![Version](https://img.shields.io/badge/Version-2.1.3-orange)
 
 ---
 
@@ -13,8 +13,7 @@ Geweb AI Search transforms your WordPress search into an intelligent assistant p
 
 The plugin intercepts the standard WordPress search form and opens a modal with two modes: instant autocomplete suggestions (via WP_Query) and a full AI chat powered by Google Gemini File Search.
 
-**[Official WordPress directory](https://wordpress.org/plugins/geweb-ai-search/)**
-
+**[Official WordPress Plugin Page](https://wordpress.org/plugins/geweb-ai-search/)**  
 **[Live Demo](https://aisearch.mygeweb.com/)**
 
 ## Features
@@ -52,7 +51,7 @@ The plugin intercepts the standard WordPress search form and opens a modal with 
 
 ### Manual
 
-1. Download the ZIP from the [Official WordPress directory](https://wordpress.org/plugins/geweb-ai-search/)
+1. Download the ZIP from the [Official WordPress Plugin Page](https://wordpress.org/plugins/geweb-ai-search/)
 2. Go to **Plugins → Add New → Upload Plugin**
 3. Select the ZIP and click **Install Now**
 4. Activate the plugin
@@ -66,21 +65,55 @@ The plugin intercepts the standard WordPress search form and opens a modal with 
 5. Click **Save Settings** — a Gemini File Search Store will be created automatically
 6. Click **Generate Library** to index all existing published content
 
-## Filters
+## Customization
 
-Customize the plugin behaviour with WordPress filters:
-
+### Modify AI Behavior
 ```php
-// Modify the AI system instruction
+// Customize AI system instruction
 add_filter('geweb_aisearch_gemini_system_instruction', function($instruction) {
-    return $instruction . "\nAlways respond in French.";
+    return $instruction . "\nAlways respond in a friendly, conversational tone.";
 });
 
-// Add or remove available models
+// Limit available models in settings
 add_filter('geweb_aisearch_gemini_models', function($models) {
     return ['gemini-2.5-flash', 'gemini-2.5-pro'];
 });
 ```
+
+### Translate Interface Texts
+```php
+// Customize search placeholder
+add_filter('geweb_aisearch_search_placeholder', function($text) {
+    return 'What would you like to know?';
+});
+
+// Customize "Ask AI" button text
+add_filter('geweb_aisearch_ask_ai_button_text', function($text) {
+    return 'Ask Pythia';
+});
+
+// Customize AI modal title
+add_filter('geweb_aisearch_ai_modal_title', function($text) {
+    return 'Oracle Pythia';
+});
+
+// Customize AI textarea placeholder
+add_filter('geweb_aisearch_ai_textarea_placeholder', function($text) {
+    return 'Write your detailed question to Pythia';
+});
+```
+
+### Available Filters
+
+**AI Behavior:**
+- `geweb_aisearch_gemini_system_instruction` - Modify AI prompt/behavior
+- `geweb_aisearch_gemini_models` - Customize available model list in settings
+
+**Interface Texts:**
+- `geweb_aisearch_search_placeholder` - Main search input placeholder
+- `geweb_aisearch_ask_ai_button_text` - "Ask AI" button label
+- `geweb_aisearch_ai_modal_title` - AI chat modal header
+- `geweb_aisearch_ai_textarea_placeholder` - AI question textarea placeholder
 
 ## Third-Party Services
 
@@ -97,6 +130,32 @@ This plugin connects to the **Google Gemini API** to index your content and answ
 ## Third-Party Libraries
 
 This plugin bundles [league/html-to-markdown](https://github.com/thephpleague/html-to-markdown) (MIT License) — used to convert WordPress post HTML to Markdown for AI indexing.
+
+## Changelog
+
+### 2.1.3
+- Improved: Modal overlay background opacity
+- Added: Filters for customizing interface text labels
+- Updated: Model gemini-3-pro-preview → gemini-3.1-pro-preview
+
+### 2.1.2
+- Improved: AI response display and formatting
+
+### 2.1.1
+- Fixed: Changed method visibility from private to public for better extensibility
+
+### 2.1.0
+- Added: AI Indexed status column in post list for enabled post types
+- Added: Re-upload button to manually re-index individual posts
+
+### 2.0.0
+- Complete rewrite with modern architecture
+- PSR-4 namespace support
+- WordPress HTTP API instead of cURL
+- Gemini 3 models support with structured JSON responses
+- API key encryption with libsodium
+- Auto document sync on save/delete
+- Conversation history support
 
 ## License
 
