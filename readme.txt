@@ -4,7 +4,7 @@ Tags: search, ai, gemini, artificial intelligence, semantic search
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 2.1.0
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: geweb-ai-search
@@ -110,19 +110,76 @@ The plugin automatically re-indexes the post when it is saved as published. If t
 
 The AI search will return an error. The standard autocomplete search will continue to work normally since it uses WordPress's built-in search.
 
-= Can I customize the AI prompt? =
-
-Yes. Use the `geweb_aisearch_gemini_system_instruction` filter to modify the system instruction sent to Gemini.
-
-= Can I customize the list of available models? =
-
-Yes. Use the `geweb_aisearch_gemini_models` filter to add or remove models from the selector.
-
 = Which Gemini models are supported? =
 
-Currently: gemini-2.5-flash, gemini-2.5-pro, gemini-3-flash-preview, gemini-3-pro-preview. Gemini 3 models support structured JSON responses with source attribution. Gemini 2.5 models return plain text answers.
+Currently: gemini-2.5-flash, gemini-2.5-pro, gemini-3-flash-preview, gemini-3.1-pro-preview. Gemini 3 models support structured JSON responses with source attribution. Gemini 2.5 models return plain text answers.
+
+== Customization ==
+
+= How do I customize the AI behavior? =
+
+You can modify the AI system instruction and available models:
+
+`
+// Customize AI system instruction
+add_filter('geweb_aisearch_gemini_system_instruction', function($instruction) {
+    return $instruction . "\nAlways respond in a friendly, conversational tone.";
+});
+
+// Limit available models in settings
+add_filter('geweb_aisearch_gemini_models', function($models) {
+    return ['gemini-2.5-flash', 'gemini-2.5-pro'];
+});
+`
+
+Available filters:
+* `geweb_aisearch_gemini_system_instruction` - Modify AI prompt/behavior
+* `geweb_aisearch_gemini_models` - Customize available model list in settings
+
+= How do I translate the interface texts? =
+
+You can customize all search interface labels using filters in your theme's functions.php:
+
+`
+// Customize search placeholder
+add_filter('geweb_aisearch_search_placeholder', function($text) {
+    return 'What would you like to know?';
+});
+
+// Customize "Ask AI" button text
+add_filter('geweb_aisearch_ask_ai_button_text', function($text) {
+    return 'Ask Pythia';
+});
+
+// Customize AI modal title
+add_filter('geweb_aisearch_ai_modal_title', function($text) {
+    return 'Oracle Pythia';
+});
+
+// Customize AI textarea placeholder
+add_filter('geweb_aisearch_ai_textarea_placeholder', function($text) {
+    return 'Write your detailed question to Pythia';
+});
+`
+
+Available filters:
+* `geweb_aisearch_search_placeholder` - Main search input placeholder
+* `geweb_aisearch_ask_ai_button_text` - "Ask AI" button label
+* `geweb_aisearch_ai_modal_title` - AI chat modal header
+* `geweb_aisearch_ai_textarea_placeholder` - AI question textarea placeholder
 
 == Changelog ==
+
+= 2.1.3 =
+* Improved: Modal overlay background opacity
+* Added: Filters for customizing interface text labels
+* Updated: Model gemini-3-pro-preview → gemini-3.1-pro-preview
+
+= 2.1.2 =
+* Improved: AI response display and formatting
+
+= 2.1.1 =
+* Fixed: Changed method visibility from private to public for better extensibility
 
 = 2.1.0 =
 * Added: AI Indexed status column in post list for enabled post types

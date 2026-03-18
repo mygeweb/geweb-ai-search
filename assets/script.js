@@ -249,9 +249,7 @@ jQuery(document).ready(function($) {
 		        this.$answerBox.append($msg);
 		    } else {
 		        const $container = $('<div class="ai-message"></div>');
-		        const $answer = $('<p></p>');
-						$answer.html(this.sanitizeAnswer(text.answer));
-		        $container.append($answer);
+						$container.html(this.sanitizeAnswer(text.answer));
 
 		        if (text.sources && text.sources.length > 0) {
 		            const $sourcesList = $('<ul></ul>');

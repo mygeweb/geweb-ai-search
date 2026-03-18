@@ -211,12 +211,13 @@ class Gemini {
 
         // Gemini 3+ returns JSON, Gemini 2.5 returns plain text
         if ($this->isGemini2Model($this->model)) {
-            return ['answer' => $responseText];
+            return ['answer' => apply_filters('the_content', $responseText)];
         } else {
             $decoded = json_decode($responseText, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
-                return ['answer' => $responseText];
+                return ['answer' => apply_filters('the_content', $responseText)];
             }
+            $decoded['answer'] = apply_filters('the_content', $decoded['answer']);
             return $decoded;
         }
     }
@@ -352,7 +353,7 @@ class Gemini {
             'gemini-2.5-flash',
             'gemini-2.5-pro',
             'gemini-3-flash-preview',
-            'gemini-3-pro-preview'
+            'gemini-3.1-pro-preview'
         ];
         return apply_filters('geweb_aisearch_gemini_models', $models);
     }

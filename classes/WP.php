@@ -309,20 +309,20 @@ class WP {
         ?>
         <dialog id="geweb-search-modal" class="geweb-aisearch-modal-window">
             <div class="modal-header">
-                <input id="geweb-search-text" type="text" placeholder="Type here what you're looking for...">
-                <button class="basic-button ask-ai" type="button" disabled>Ask AI</button>
+                <input id="geweb-search-text" type="text" placeholder="<?php echo esc_attr(apply_filters('geweb_aisearch_search_placeholder', 'Type here what you are looking for...')); ?>">
+                <button class="basic-button ask-ai" type="button" disabled><?php echo esc_html(apply_filters('geweb_aisearch_ask_ai_button_text', 'Ask AI')); ?></button>
                 <div class="close"></div>
             </div>
             <div class="results-box" id="geweb-autocomplete-results"></div>
         </dialog>
         <dialog id="geweb-ai-modal" class="geweb-aisearch-modal-window">
             <div class="modal-header">
-                <strong class="ai-assistant-title">AI Assistant</strong>
+                <strong class="ai-assistant-title"><?php echo esc_html(apply_filters('geweb_aisearch_ai_modal_title', 'AI Assistant')); ?></strong>
                 <div class="close"></div>
             </div>
             <div class="answer-box"></div>
             <div class="question-box">
-                <textarea id="geweb-ai-query-display" placeholder="Ask AI a question..."></textarea>
+                <textarea id="geweb-ai-query-display" placeholder="<?php echo esc_attr(apply_filters('geweb_aisearch_ai_textarea_placeholder', 'Ask AI a question...')); ?>"></textarea>
                 <button id="geweb-ask-ai-submit" class="btn" type="submit" disabled></button>
             </div>
         </dialog>

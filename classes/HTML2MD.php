@@ -281,7 +281,7 @@ class HTML2MD {
      * @param int $postId Post ID
      * @return void
      */
-    private function deleteDocumentForPost(int $postId): void {
+    public function deleteDocumentForPost(int $postId): void {
         $documentName = get_post_meta($postId, self::META_DOCUMENT_NAME, true);
         if (empty($documentName)) {
             return;

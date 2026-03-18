@@ -152,23 +152,17 @@ body.no-scroll {
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 8px;
     padding: 16px;
-
-	/*
-	*	my
-	*/
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	/*
-	*	==========
-	*/
 }
 
-/*
-*	my
-*/
 #geweb-ai-modal{
 	height: 90%;
+}
+#geweb-ai-modal::backdrop,
+#geweb-search-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 .user-message,
 .ai-message {
@@ -188,13 +182,24 @@ body.no-scroll {
 	background-color: rgba(0,0,0,.06);
 	border-bottom-left-radius: 0;
 }
-/*
-*	==========
-*/
-
-.geweb-aisearch-modal-window .answer-box p:last-of-type {
-    margin: 0;
+.ai-message ul,
+.ai-message ol{
+    list-style: disc;
+    padding: 0 0 0 15px;
+    margin: 0 0 15px;
 }
+.ai-message ol{
+    list-style: decimal;
+}
+.ai-message b,
+.ai-message strong{
+    font-weight: bold;
+}
+.ai-message i,
+.ai-message em{
+    font-style: italic;
+}
+
 .geweb-aisearch-modal-window .question-box {
     display: flex;
     align-items: flex-start;
