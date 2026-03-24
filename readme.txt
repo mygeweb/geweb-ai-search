@@ -4,7 +4,7 @@ Tags: search, ai, gemini, artificial intelligence, semantic search
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: geweb-ai-search
@@ -169,6 +169,9 @@ Available filters:
 * `geweb_aisearch_ai_textarea_placeholder` - AI question textarea placeholder
 
 == Changelog ==
+
+= 2.1.4 =
+* Fixed: Nonce compatibility with page caching plugins
 
 = 2.1.3 =
 * Improved: Modal overlay background opacity

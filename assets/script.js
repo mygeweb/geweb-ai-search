@@ -1,4 +1,12 @@
 jQuery(document).ready(function($) {
+	$.post(geweb_aisearch.ajax_url, {
+			action: 'geweb_get_nonce'
+	}, function(response) {
+			if (response.success) {
+					geweb_aisearch.search_nonce = response.data.nonce;
+			}
+	});
+	
 	const GewebModal = {
 	    el: document.getElementById('geweb-search-modal'),
 	    ai: document.getElementById('geweb-ai-modal'),

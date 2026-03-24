@@ -22,6 +22,9 @@ class WP {
         add_action('wp_ajax_geweb_ai_chat', [$this, 'ajaxAiChat']);
         add_action('wp_ajax_nopriv_geweb_ai_chat', [$this, 'ajaxAiChat']);
 
+        add_action('wp_ajax_geweb_get_nonce', [$this, 'ajaxGetNonce']);
+        add_action('wp_ajax_nopriv_geweb_get_nonce', [$this, 'ajaxGetNonce']);
+
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
 
@@ -255,6 +258,17 @@ class WP {
     }
 
     /**
+     * AJAX: Get fresh nonce (for cache compatibility)
+     *
+     * @return void
+     */
+    public function ajaxGetNonce(): void {
+        wp_send_json_success([
+            'nonce' => wp_create_nonce('geweb_ai_search_search')
+        ]);
+    }
+
+    /**
      * Enqueue frontend scripts and styles
      *
      * @return void
@@ -276,8 +290,7 @@ class WP {
         );
 
         wp_localize_script('geweb-ai-search', 'geweb_aisearch', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'search_nonce' => wp_create_nonce('geweb_ai_search_search')
+            'ajax_url' => admin_url('admin-ajax.php')
         ]);
     }
 
