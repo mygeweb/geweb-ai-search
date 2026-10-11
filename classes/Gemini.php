@@ -235,7 +235,7 @@ class Gemini {
         if (empty($this->apiKey)) {
             throw new \Exception('Configuration error');
         }
-        
+
         $response = wp_remote_request($url, [
             'method'  => $method,
             'timeout' => 120,
@@ -307,7 +307,6 @@ class Gemini {
         // Add JSON schema for Gemini 3+ models
         if (!$this->isGemini2Model($this->model)) {
             $body['generationConfig'] = [
-                'temperature' => 0.3,
                 'responseMimeType' => 'application/json',
                 'responseJsonSchema' => [
                     'type' => 'object',
@@ -344,6 +343,7 @@ class Gemini {
     }
 
     /**
+	 * https://ai.google.dev/gemini-api/docs/models
      * Get list of available Gemini models
      *
      * @return array Model names
@@ -353,7 +353,13 @@ class Gemini {
             'gemini-2.5-flash',
             'gemini-2.5-pro',
             'gemini-3-flash-preview',
-            'gemini-3.1-pro-preview'
+            'gemini-3.1-pro-preview',
+			'gemini-3.1-flash-lite',
+			'gemini-3.5-flash-lite',
+			'gemini-3.5-flash',
+			'gemini-3.6-flash',
+			'gemini-3.7-flash',
+			'gemini-3.8-flash'
         ];
         return apply_filters('geweb_aisearch_gemini_models', $models);
     }
